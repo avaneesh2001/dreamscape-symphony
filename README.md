@@ -1,3 +1,4 @@
+![Dreamscape Symphony](logo.png)
 # Dreamscape Symphony 🎶
 
 Dreamscape Symphony is an AI-powered web app that transforms your dreams into personalized song lyrics and generates text-to-speech (TTS) audio. Using advanced natural language processing techniques, the app analyzes dream descriptions to extract key themes, named entities, and emotions, creating unique songs from your subconscious thoughts.
