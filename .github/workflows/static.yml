@@ -41,11 +41,11 @@ jobs:
           # Run Doxygen to generate docs (adjust command if necessary)
           doxygen Doxyfile
 
-      - name: Move docs to gh-pages branch
+      - name: Move docs to gh-pages/docs directory
         run: |
-          # Remove existing docs and copy the newly generated ones to the correct location
+          # Remove existing docs and copy the newly generated ones to the gh-pages/docs folder
           rm -rf gh-pages/docs/*
-          mv Docs/html/* gh-pages/docs/  # Move generated docs to the /docs folder
+          mv Docs/html/* gh-pages/docs/  # Move generated docs to the /gh-pages/docs folder
           rm -rf gh-pages/docs/index.html  # Optionally remove existing index.html to avoid conflicts
 
       - name: Commit and Push Changes
