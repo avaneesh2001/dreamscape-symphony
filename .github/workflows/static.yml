@@ -1,5 +1,3 @@
-# .github/workflows/deploy-docs.yml
-
 name: Deploy Doxygen Docs to GitHub Pages
 
 on:
@@ -43,17 +41,18 @@ jobs:
           # Run Doxygen to generate docs (adjust command if necessary)
           doxygen Doxyfile
 
-      - name: Copy docs to gh-pages branch
+      - name: Move docs to gh-pages branch
         run: |
-          # Remove existing docs and copy the newly generated ones
+          # Remove existing docs and copy the newly generated ones to the correct location
           rm -rf gh-pages/docs/*
-          cp -R Docs/* gh-pages/Docs/
-        
+          mv Docs/html/* gh-pages/docs/  # Move generated docs to the /docs folder
+          rm -rf gh-pages/docs/index.html  # Optionally remove existing index.html to avoid conflicts
+
       - name: Commit and Push Changes
         run: |
           cd gh-pages
           git config --local user.name "github-actions"
           git config --local user.email "github-actions@github.com"
-          git add Docs/
+          git add docs/
           git commit -m "Update documentation" || echo "No changes to commit"
           git push origin gh-pages
