@@ -27,16 +27,21 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y doxygen graphviz
 
-      - name: Generate Doxygen Documentation
-        run: |
-          # Run Doxygen to generate docs (adjust command if necessary)
-          doxygen Doxyfile
-
       - name: Checkout gh-pages branch
         uses: actions/checkout@v4
         with:
           ref: gh-pages
           path: gh-pages  # Check out into a subdirectory
+
+      - name: Copy Doxyfile to Working Directory
+        run: |
+          # Copy Doxyfile from gh-pages to the current working directory
+          cp gh-pages/Doxyfile . 
+
+      - name: Generate Doxygen Documentation
+        run: |
+          # Run Doxygen to generate docs (adjust command if necessary)
+          doxygen Doxyfile
 
       - name: Copy docs to gh-pages branch
         run: |
