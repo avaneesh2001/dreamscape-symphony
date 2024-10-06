@@ -47,7 +47,7 @@ jobs:
         run: |
           # Remove existing docs and copy the newly generated ones
           rm -rf gh-pages/docs/*
-          cp -R docs/* gh-pages/docs/
+          cp -R Docs/* gh-pages/Docs/
         
       - name: Commit and Push Changes
         run: |
