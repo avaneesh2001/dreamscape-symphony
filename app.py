@@ -44,7 +44,7 @@ with col1:
     # Dream Input Section
     st.header("1. Enter Your Dream")
     dream_text = st.text_area(
-        "Describe your dream in about 200 charecters:", height=200
+        "Describe your dream in about 500 charecters:", height=200
     )
     st.session_state.dream_text = dream_text
 
