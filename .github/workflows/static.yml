@@ -9,30 +9,41 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write  # Grant write access to contents
   pages: write
   id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout main branch
         uses: actions/checkout@v4
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
         with:
-          # Upload only the docs folder
-          path: 'docs/'
+          ref: main  # Check out the main branch
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Generate Doxygen Documentation
+        run: |
+          # Run Doxygen to generate docs (adjust command if necessary)
+          doxygen Doxyfile
+
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages  # Check out into a subdirectory
+
+      - name: Copy docs to gh-pages branch
+        run: |
+          # Remove existing docs and copy the newly generated ones
+          rm -rf gh-pages/docs/*
+          cp -R docs/* gh-pages/docs/
+        
+      - name: Commit and Push Changes
+        run: |
+          cd gh-pages
+          git config --local user.name "github-actions"
+          git config --local user.email "github-actions@github.com"
+          git add docs/
+          git commit -m "Update documentation"
+          git push origin gh-pages
