@@ -45,7 +45,7 @@ class LyricGenerator:
 
         :return: None
         """
-        self.api_token = st.secrets("HUGGINGFACE_API_TOKEN")
+        self.api_token = st.secretsst.secrets["huggingface"]["HUGGINGFACE_API_TOKEN"]
 
     def generate_prompt(
         self,
