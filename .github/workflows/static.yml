@@ -34,20 +34,25 @@ jobs:
       - name: Copy Doxyfile to Working Directory
         run: |
           # Copy Doxyfile from gh-pages to the current working directory
-          cp gh-pages/Doxyfile . 
+          cp gh-pages/Doxyfile .
 
       - name: Generate Doxygen Documentation
         run: |
           # Run Doxygen to generate docs (adjust command if necessary)
           doxygen Doxyfile
 
-      - name: Move docs to gh-pages/docs directory
+      - name: Prepare docs directory
         run: |
-          # Remove existing docs and copy the newly generated ones to the gh-pages/docs folder
-          rm -rf gh-pages/docs/*
-          mv Docs/html/* gh-pages/docs/  # Move generated docs to the /gh-pages/docs folder
-          rm -rf gh-pages/docs/index.html  # Optionally remove existing index.html to avoid conflicts
+          # Create the docs directory if it doesn't exist
+          mkdir -p gh-pages/docs
 
+      - name: Copy docs to gh-pages branch
+        run: |
+          # Remove existing docs and copy the newly generated ones
+          rm -rf gh-pages/docs/*
+          mkdir -p gh-pages/docs
+          cp -R Docs/html/* gh-pages/docs/  # Ensure the target path is correct
+        
       - name: Commit and Push Changes
         run: |
           cd gh-pages
