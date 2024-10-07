@@ -16,7 +16,7 @@ Dreamscape Symphony is an AI-powered web app that transforms your dreams into pe
 
 You can try out the live version of Dreamscape Symphony here:
 
-[Live Demo on Streamlit Cloud](#https://dreamscape-symphony.streamlit.app/)
+[Live Demo on Streamlit Cloud](https://dreamscape-symphony.streamlit.app/)
 
 ## 📖 Usage
 
